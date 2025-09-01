@@ -5,6 +5,8 @@
 
 Generate Domain Specific Language (DSL) statements from Natural Language input using Large Language Models (LLMs).
 
+🚀 **[Try the Live Demo](https://dsllm-demo.vercel.app/)** - Transform natural language into SQL queries instantly!
+
 ## Overview
 
 `dsllm` is a Python library that converts natural language descriptions into structured DSL statements. Currently supports SQL generation with OpenAI models, designed to be extensible to other DSLs and LLM providers.
@@ -67,27 +69,6 @@ asyncio.run(main())
 result = await generator.generate("Show me all users")
 print(result.dsl_statement)  # SELECT * FROM users;
 ```
-
-### With Context and Constraints
-
-```python
-result = await generator.generate(
-    "Find recent orders with high values",
-    context={"tables": ["orders", "customers"]},
-    constraints={"max_rows": 50}
-)
-```
-
-### Read-Only Mode
-
-```python
-# Enable read-only mode for safety
-sql_generator = SQLGenerator(enforce_read_only=True)
-generator = DSLLMGenerator(provider=provider, dsl_generator=sql_generator)
-
-# Only SELECT statements will be generated
-result = await generator.generate("Get user data")  # ✅ Works
-result = await generator.generate("Delete old records")  # ❌ Fails validation
 ```
 
 ## Configuration
@@ -100,8 +81,8 @@ result = await generator.generate("Delete old records")  # ❌ Fails validation
 
 ```python
 provider = OpenAIProvider(
-    model="gpt-4",           # Model to use
-    temperature=0.1,         # Generation temperature
+    model="gpt-5-mini",           # Model to use
+    temperature=1.0,         # Generation temperature
     max_tokens=500          # Maximum tokens
 )
 ```
