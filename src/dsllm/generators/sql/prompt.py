@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class SQLPromptGenerator:
     """Handles SQL prompt generation and formatting."""
     
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the SQL prompt generator."""
         pass
     

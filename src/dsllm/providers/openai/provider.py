@@ -67,13 +67,18 @@ class OpenAIProvider:
         
         messages.append({"role": "user", "content": prompt})
         
-        # Merge generation parameters
-        generation_params = {
+        # Prepare generation parameters with proper types
+        generation_params: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
             "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
         }
+        
+        # Only add max_tokens if it's not None
+        if self.max_tokens is not None:
+            generation_params["max_tokens"] = self.max_tokens
+            
+        # Add any additional kwargs
         generation_params.update(kwargs)
         
         try:
@@ -87,7 +92,7 @@ class OpenAIProvider:
             if content is None:
                 raise ProviderError("No content returned from OpenAI API")
             
-            return content.strip()
+            return str(content).strip()
             
         except openai.OpenAIError as e:
             logger.error(f"OpenAI API error: {e}")

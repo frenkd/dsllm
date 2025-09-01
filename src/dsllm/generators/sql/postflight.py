@@ -36,8 +36,8 @@ class SQLPostflightValidator:
         Returns:
             ValidationResult with validation status and any errors/warnings
         """
-        errors = []
-        warnings = []
+        errors: list[str] = []
+        warnings: list[str] = []
         
         # Basic validation
         if not result or len(result.strip()) == 0:

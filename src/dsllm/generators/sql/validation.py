@@ -31,8 +31,8 @@ class SQLPreflightValidator:
         Returns:
             ValidationResult with validation status and any errors/warnings
         """
-        errors = []
-        warnings = []
+        errors: list[str] = []
+        warnings: list[str] = []
         
         # Basic validation - check if natural language input exists
         if not request.natural_language or len(request.natural_language.strip()) < 3:
