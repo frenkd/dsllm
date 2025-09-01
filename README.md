@@ -38,7 +38,7 @@ async def main():
     provider = OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY"))
     sql_generator = SQLGenerator()
     generator = DSLLMGenerator(provider=provider, dsl_generator=sql_generator)
-    
+
     # Generate SQL from natural language
     result = await generator.generate(
         natural_language="Find all active users who registered this month",
@@ -53,7 +53,7 @@ async def main():
             '''
         }
     )
-    
+
     print("Generated SQL:")
     print(result.dsl_statement)
 

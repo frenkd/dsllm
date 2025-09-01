@@ -31,7 +31,7 @@
 
 2. **LLM Providers** (Pluggable)
    - Abstract interface for different LLM services
-   - Currently: OpenAI (GPT-3.5/4)
+   - Currently: OpenAI (GPT-5 and GPT-5-mini)
    - Planned: Anthropic, Google, Azure, Local models
 
 3. **DSL Generators** (Extensible)
@@ -109,8 +109,8 @@ async def generate(
 ```python
 class LLMProvider(Protocol):
     async def generate(
-        self, 
-        prompt: str, 
+        self,
+        prompt: str,
         system_prompt: Optional[str] = None,
         **kwargs: Any
     ) -> str
@@ -123,9 +123,9 @@ class LLMProvider(Protocol):
 - Token management
 
 **Current Implementation: OpenAI**
-- GPT-3.5/4 support
-- Configurable temperature/tokens
+- GPT-5 as default model
 - Built-in error handling
+- Uses CFG-constrained generation
 
 ### DSL Generator Interface
 
@@ -228,7 +228,7 @@ Example:
 class GraphQLGenerator(DSLGenerator):
     def get_system_prompt(self) -> str:
         return "Generate GraphQL queries..."
-    
+
     # ... other methods
 ```
 
